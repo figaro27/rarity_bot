@@ -17,6 +17,7 @@ bot.on('ready', () => {
 bot.on('messageCreate', async (msg) => {
   const content = msg.content;
   const channel = msg.channel.name;
+  console.log(content);
   if(content.startsWith(PREFIX) && channel === "rarity") {
     const parts = content.split(' ').map(s => s.trim()).filter(s => s);
     const tier = tiers.find(_tier => _tier.id.toString() === parts[1]);
