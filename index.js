@@ -1,7 +1,7 @@
 const eris = require('eris');
 const tiers = require('./ss_tier.json');
 require('dotenv').config();
-const PREFIX = '$SS_Rarity';
+const PREFIX = '$rank';
 
 // Create a Client instance with our bot token.
 const bot = new eris.Client(process.env.CLIENT_TOKEN);
