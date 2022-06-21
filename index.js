@@ -21,7 +21,7 @@ bot.on('messageCreate', async (msg) => {
     const parts = content.split(' ').map(s => s.trim()).filter(s => s);
     const tier = tiers.find(_tier => _tier.id.toString() === parts[1]);
     let text = `__**ShogunSamurai**: #${parts[1]}__\n`;
-    text += ` **Rating**: ${tier.rank} / 7470\n`;
+    text += ` **Rank**: ${tier.rank} / 7470\n`;
     text += ` **Tier**: ${tier.tier}`;
 
     try {
