@@ -1,4 +1,5 @@
 const eris = require('eris');
+const tiers = require('./ss_tier.json');
 require('dotenv').config();
 const PREFIX = '$SS_Rarity';
 
@@ -21,9 +22,10 @@ bot.on('messageCreate', async (msg) => {
     // // two `s allows you to add an object in a string. To add the object, put it inside this -> ${}
 
     const parts = content.split(' ').map(s => s.trim()).filter(s => s);
+    const tier = tiers.find(_tier => _tier.id.toString() === parts[1]);
 
     try {
-        await msg.channel.createMessage('SS: ' +  parts[1]);
+        await msg.channel.createMessage(`**ShogunSamurai**: #${parts[1]} \n Rank: ${tier.rank}`);
     } catch (err) {
         // There are various reasons why sending a message may fail.
         // The API might time out or choke and return a 5xx status,
