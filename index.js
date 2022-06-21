@@ -15,15 +15,15 @@ bot.on('ready', () => {
 // If it was, the bot will attempt to respond with "Present".
 bot.on('messageCreate', async (msg) => {
   const content = msg.content;
-  if(message.channel.name.equals("rarity") && content.startsWith(PREFIX)) {
-    message.channel.send(`Thank you for your feedback ${message.author.username}! It has been sent to the admins.`);
-    // two `s allows you to add an object in a string. To add the object, put it inside this -> ${}
+  const channel = msg.channel.name;
+  if(content.startsWith(PREFIX) && channel === "rarity") {
+    // msg.channel.send(`Thank you for your feedback ${msg.author.username}! It has been sent to the admins.`);
+    // // two `s allows you to add an object in a string. To add the object, put it inside this -> ${}
 
     const parts = content.split(' ').map(s => s.trim()).filter(s => s);
-    console.log("ss ID------", parts[1]);
 
     try {
-        await msg.channel.createMessage('Present');
+        await msg.channel.createMessage('SS: ' +  parts[1]);
     } catch (err) {
         // There are various reasons why sending a message may fail.
         // The API might time out or choke and return a 5xx status,
