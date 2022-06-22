@@ -28,6 +28,22 @@ bot.on('ready', () => {
 bot.on('messageCreate', async (msg) => {
   const content = msg.content;
   const channel = msg.channel.name;
+  const botWasMentioned = msg.mentions.find(
+      mentionedUser => mentionedUser.id === bot.user.id,
+  );
+
+  if (botWasMentioned) {
+      try {
+          await msg.channel.createMessage(channel);
+      } catch (err) {
+          // There are various reasons why sending a message may fail.
+          // The API might time out or choke and return a 5xx status,
+          // or the bot may not have permission to send the
+          // message (403 status).
+          console.warn('Failed to respond to mention.');
+          console.warn(err);
+      }
+  }
   if(content.startsWith(PREFIX) && channel === CHANNEL) {
     const parts = content.split(' ').map(s => s.trim()).filter(s => s);
     const tier = tiers.find(_tier => _tier.id.toString() === parts[1]);
