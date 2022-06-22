@@ -1,9 +1,20 @@
 const eris = require('eris');
 const tiers = require('./ss_tier.json');
 require('dotenv').config();
+
 const PREFIX = '$rank';
 const CHANNEL_NAME = 'samurais-ranking';
 const CHANNEL_ID = 898599938559180850;
+
+const http = require('http');
+
+http.createServer((req, res) => {
+  res.writeHead(200, {
+      'Content-type': 'text/plain'
+  });
+      res.write('Server running');
+      res.end();
+}).listen(process.env.PORT || 5000);
 
 // Create a Client instance with our bot token.
 const bot = new eris.Client(process.env.CLIENT_TOKEN);
@@ -46,13 +57,3 @@ bot.on('error', err => {
 });
 
 bot.connect();
-
-const http = require('http');
-
-http.createServer((req, res) => {
-  res.writeHead(200, {
-      'Content-type': 'text/plain'
-  });
-      res.write('Server running');
-      res.end();
-}).listen(process.env.PORT || 5000);
