@@ -36,7 +36,7 @@ bot.on('messageCreate', async (msg) => {
     text += ` **Tier**: ${tier.tier}`;
 
     try {
-        await msg.channel.createMessage(text);
+      await msg.channel.createMessage(text);
     } catch (err) {
         // There are various reasons why sending a message may fail.
         // The API might time out or choke and return a 5xx status,
