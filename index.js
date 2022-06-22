@@ -20,7 +20,7 @@ const bot = new eris.Client(process.env.CLIENT_TOKEN);
 
 // When the bot is connected and ready, log to console.
 bot.on('ready', () => {
-   console.log('Connected and ready.');
+   console.log('Connected and Ready.');
 });
 
 // Every time a message is sent anywhere the bot is present,
