@@ -2,6 +2,7 @@ const eris = require('eris');
 const tiers = require('./ss_tier.json');
 require('dotenv').config();
 const PREFIX = '$rank';
+const CHANNEL = 'samurais-ranking';
 
 // Create a Client instance with our bot token.
 const bot = new eris.Client(process.env.CLIENT_TOKEN);
@@ -17,8 +18,7 @@ bot.on('ready', () => {
 bot.on('messageCreate', async (msg) => {
   const content = msg.content;
   const channel = msg.channel.name;
-  console.log(content);
-  if(content.startsWith(PREFIX) && channel === "rarity") {
+  if(content.startsWith(PREFIX) && channel === CHANNEL) {
     const parts = content.split(' ').map(s => s.trim()).filter(s => s);
     const tier = tiers.find(_tier => _tier.id.toString() === parts[1]);
     let text = `__**ShogunSamurai**: #${parts[1]}__\n`;
