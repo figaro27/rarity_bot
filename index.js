@@ -4,6 +4,16 @@ require('dotenv').config();
 const PREFIX = '$rank';
 const CHANNEL = 'samurais-ranking';
 
+const http = require('http');
+
+http.createServer((req, res) => {
+  res.writeHead(200, {
+      'Content-type': 'text/plain'
+  });
+      res.write('Server running');
+      res.end();
+}).listen(process.env.PORT || 5000);
+
 // Create a Client instance with our bot token.
 const bot = new eris.Client(process.env.CLIENT_TOKEN);
 
