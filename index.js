@@ -2,7 +2,8 @@ const eris = require('eris');
 const tiers = require('./ss_tier.json');
 require('dotenv').config();
 const PREFIX = '$rank';
-const CHANNEL = 'samurais-ranking';
+const CHANNEL_NAME = 'samurais-ranking';
+const CHANNEL_ID = 898599938559180850;
 
 const http = require('http');
 
@@ -27,24 +28,10 @@ bot.on('ready', () => {
 // If it was, the bot will attempt to respond with "Present".
 bot.on('messageCreate', async (msg) => {
   const content = msg.content;
-  const channel = msg.channel.name;
-  const botWasMentioned = msg.mentions.find(
-      mentionedUser => mentionedUser.id === bot.user.id,
-  );
+  const channel_name = msg.channel.name;
+  const channel_id = msg.channel.id;
 
-  if (botWasMentioned) {
-      try {
-          await msg.channel.createMessage(channel);
-      } catch (err) {
-          // There are various reasons why sending a message may fail.
-          // The API might time out or choke and return a 5xx status,
-          // or the bot may not have permission to send the
-          // message (403 status).
-          console.warn('Failed to respond to mention.');
-          console.warn(err);
-      }
-  }
-  if(content.startsWith(PREFIX) && channel === CHANNEL) {
+  if(content.startsWith(PREFIX) && (channel_name.includes(CHANNEL_NAME) || channel_id === CHANNEL_ID)) {
     const parts = content.split(' ').map(s => s.trim()).filter(s => s);
     const tier = tiers.find(_tier => _tier.id.toString() === parts[1]);
     let text = `__**ShogunSamurai**: #${parts[1]}__\n`;
